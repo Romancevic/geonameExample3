@@ -7,20 +7,17 @@
 
     // get country border feature
 
-    $countryBorders = json_decode(file_get_contents("countryBorders.geo.json"), true);
-
+    $countryBorders = json_decode(file_get_contents('countryBorders.geo.json'), true);
     $border = null;
 
-    foreach ($countryBorders['features'] as $feature) {
+    foreach($countryBorders['features'] as $feature) {
 
-        if ($feature["properties"]["iso_a2"] ==  $_REQUEST['countryCode']) {
-
-            $border = $feature;
-            break;
-
-        }
-
+    	if($feature['properties']['ISO_A3'] == $_REQUEST['iso3']) {
+    		$border = $feature; break;
+    	}
     }
+
+
 
 
     $url='http://api.geonames.org/countryInfoJSON?formatted=true&lang=' . $_REQUEST['lang'] . '&country=' . $_REQUEST['country'] . '&username=Romancevic&style=full';
